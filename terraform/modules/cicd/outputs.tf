@@ -24,3 +24,8 @@ output "codebuild_project_names" {
     name => project.name
   }
 }
+
+output "pipeline_name" {
+  description = "Automated microservices CodePipeline"
+  value       = aws_codepipeline.main.name
+}

@@ -47,3 +47,29 @@ variable "artifacts_bucket_arn" {
   description = "Existing CodePipeline artifacts bucket ARN"
   type        = string
 }
+
+variable "github_connection_arn" {
+  description = "Existing GitHub CodeConnections ARN"
+  type        = string
+}
+
+variable "github_repository" {
+  description = "GitHub owner/repository"
+  type        = string
+}
+
+variable "github_branch" {
+  description = "GitHub branch used by CodePipeline"
+  type        = string
+  default     = "main"
+}
+
+variable "artifacts_bucket_name" {
+  description = "Existing S3 pipeline artifacts bucket"
+  type        = string
+}
+
+variable "ecs_execution_role_arn" {
+  description = "IAM execution role used by ECS task definitions"
+  type        = string
+}

@@ -25,3 +25,8 @@ output "task_definition_arns" {
     name => task.arn
   }
 }
+
+output "execution_role_arn" {
+  description = "ECS Fargate task execution role ARN"
+  value       = aws_iam_role.ecs_execution.arn
+}

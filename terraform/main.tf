@@ -93,4 +93,13 @@ module "cicd" {
   repository_arns = module.ecr.repository_arns
 
   artifacts_bucket_arn = module.data.artifacts_bucket_arn
+
+  github_connection_arn = "arn:aws:codeconnections:ap-southeast-2:488510448462:connection/c33b980a-852e-49fd-afcd-5707a3027f7a"
+
+  github_repository = "SpursFan21/DCE-Terraform-Project"
+  github_branch     = "main"
+
+  artifacts_bucket_name = module.data.artifacts_bucket_name
+
+  ecs_execution_role_arn = module.ecs.execution_role_arn
 }

@@ -57,3 +57,8 @@ output "codebuild_project_names" {
   description = "AWS CodeBuild projects"
   value       = module.cicd.codebuild_project_names
 }
+
+output "codepipeline_name" {
+  description = "Automated CI/CD pipeline name"
+  value       = module.cicd.pipeline_name
+}
