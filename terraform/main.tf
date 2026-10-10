@@ -103,3 +103,8 @@ module "cicd" {
 
   ecs_execution_role_arn = module.ecs.execution_role_arn
 }
+
+# Microsoft Entra ID to AWS IAM SAML federation
+module "identity" {
+  source = "./modules/identity"
+}

@@ -35,3 +35,7 @@ coverage/
 
 github-trust-policy.json
 github-ecr-policy.json
+# Local Entra federation and Terraform outputs
+terraform/entra-federation.xml
+terraform/identity-plan.txt
+entra-saml-trust.json
