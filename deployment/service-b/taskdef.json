@@ -1,0 +1,48 @@
+{
+    "family":  "dce04-service-b",
+    "executionRoleArn":  "arn:aws:iam::488510448462:role/dce04-ecs-execution-role",
+    "networkMode":  "awsvpc",
+    "containerDefinitions":  [
+                                 {
+                                     "name":  "service-b",
+                                     "image":  "\u003cIMAGE1_NAME\u003e",
+                                     "cpu":  0,
+                                     "portMappings":  [
+                                                          {
+                                                              "containerPort":  8080,
+                                                              "hostPort":  8080,
+                                                              "protocol":  "tcp"
+                                                          }
+                                                      ],
+                                     "essential":  true,
+                                     "environment":  [
+
+                                                     ],
+                                     "mountPoints":  [
+
+                                                     ],
+                                     "volumesFrom":  [
+
+                                                     ],
+                                     "logConfiguration":  {
+                                                              "logDriver":  "awslogs",
+                                                              "options":  {
+                                                                              "awslogs-group":  "/ecs/dce04/service-b",
+                                                                              "awslogs-region":  "ap-southeast-2",
+                                                                              "awslogs-stream-prefix":  "ecs"
+                                                                          }
+                                                          },
+                                     "systemControls":  [
+
+                                                        ]
+                                 }
+                             ],
+    "volumes":  [
+
+                ],
+    "requiresCompatibilities":  [
+                                    "FARGATE"
+                                ],
+    "cpu":  "256",
+    "memory":  "512"
+}
