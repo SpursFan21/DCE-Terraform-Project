@@ -1,7 +1,7 @@
 const http = require("http");
 
 const service = "service-a";
-const version = "v1";
+const version = "v2";
 const port = 8080;
 
 const server = http.createServer((req, res) => {

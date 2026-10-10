@@ -1,0 +1,56 @@
+
+name: DCE04 Build and Publish
+
+on:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  id-token: write
+
+jobs:
+  build-and-push:
+    name: Build ${{ matrix.service }}
+    runs-on: ubuntu-latest
+
+    strategy:
+      fail-fast: false
+      matrix:
+        service:
+          - service-a
+          - service-b
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+
+      - name: Validate JavaScript
+        run: |
+          node --check applications/${{ matrix.service }}/server.js
+
+      - name: Configure AWS credentials
+        uses: aws-actions/configure-aws-credentials@v4
+        with:
+          role-to-assume: arn:aws:iam::488510448462:role/dce04-github-actions-role
+          aws-region: ap-southeast-2
+
+      - name: Login to Amazon ECR
+        id: login-ecr
+        uses: aws-actions/amazon-ecr-login@v2
+
+      - name: Build and push Docker image
+        env:
+          ECR_REGISTRY: ${{ steps.login-ecr.outputs.registry }}
+          SERVICE: ${{ matrix.service }}
+          IMAGE_TAG: v2
+        run: |
+          docker build \
+            -t "$ECR_REGISTRY/dce04-$SERVICE:$IMAGE_TAG" \
+            "./applications/$SERVICE"
+
+          docker push "$ECR_REGISTRY/dce04-$SERVICE:$IMAGE_TAG"

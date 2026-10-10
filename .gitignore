@@ -32,3 +32,6 @@ coverage/
 
 # Keep provider dependency lock files tracked
 !.terraform.lock.hcl
+
+github-trust-policy.json
+github-ecr-policy.json
