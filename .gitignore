@@ -1,0 +1,34 @@
+# Terraform local working data and state
+**/.terraform/
+**/*.tfstate
+**/*.tfstate.*
+**/*.tfplan
+**/crash.log
+**/crash.*.log
+**/*.tfvars
+**/*.tfvars.json
+**/*.tfbackend
+**/.terraform.tfstate.lock.info
+**/override.tf
+**/override.tf.json
+**/*_override.tf
+**/*_override.tf.json
+
+# Credentials and local settings
+.env
+.env.*
+!.env.example
+*.pem
+*.key
+.aws/
+.vscode/
+
+# Backups and generated files
+state-backup/
+transaction.json
+evidence/
+node_modules/
+coverage/
+
+# Keep provider dependency lock files tracked
+!.terraform.lock.hcl
