@@ -42,3 +42,18 @@ output "dynamodb_table_name" {
   description = "DynamoDB transaction table"
   value       = module.data.dynamodb_table_name
 }
+
+output "codedeploy_app_names" {
+  description = "CodeDeploy applications"
+  value       = module.cicd.codedeploy_app_names
+}
+
+output "codedeploy_group_names" {
+  description = "Blue/Green deployment groups"
+  value       = module.cicd.deployment_group_names
+}
+
+output "codebuild_project_names" {
+  description = "AWS CodeBuild projects"
+  value       = module.cicd.codebuild_project_names
+}

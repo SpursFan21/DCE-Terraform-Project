@@ -4,25 +4,25 @@ version: 0.2
 phases:
   pre_build:
     commands:
-      - echo "Authenticating with Amazon ECR"
+      - echo "Logging in to Amazon ECR"
       - aws ecr get-login-password --region "$AWS_DEFAULT_REGION" | docker login --username AWS --password-stdin "${AWS_ACCOUNT_ID}.dkr.ecr.${AWS_DEFAULT_REGION}.amazonaws.com"
-      - IMAGE_TAG="build-$(echo "$CODEBUILD_RESOLVED_SOURCE_VERSION" | cut -c 1-12)"
+      - IMAGE_TAG="build-${CODEBUILD_BUILD_NUMBER}-$(echo "$CODEBUILD_RESOLVED_SOURCE_VERSION" | cut -c 1-8)"
       - IMAGE_URI="${ECR_REPOSITORY_URI}:${IMAGE_TAG}"
       - echo "Building ${SERVICE_NAME} as ${IMAGE_TAG}"
 
   build:
     commands:
-      - echo "Checking the application syntax"
+      - echo "Validating JavaScript syntax"
       - node --check "applications/${SERVICE_NAME}/server.js"
-      - echo "Building the Docker container"
+      - echo "Building Docker image"
       - docker build -t "$IMAGE_URI" "applications/${SERVICE_NAME}"
 
   post_build:
     commands:
-      - echo "Pushing container to Amazon ECR"
+      - echo "Pushing image to Amazon ECR"
       - docker push "$IMAGE_URI"
       - printf '{"ImageURI":"%s"}' "$IMAGE_URI" > imageDetail.json
-      - echo "Build and upload completed"
+      - echo "Build completed successfully"
 
 artifacts:
   files:

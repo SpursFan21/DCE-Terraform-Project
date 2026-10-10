@@ -75,3 +75,22 @@ module "data" {
   project_name  = "dce04"
   bucket_suffix = data.aws_caller_identity.current.account_id
 }
+
+module "cicd" {
+  source = "./modules/cicd"
+
+  project_name = "dce04"
+
+  cluster_name      = module.ecs.cluster_name
+  service_names     = module.ecs.service_names
+  target_group_arns = module.alb.target_group_arns
+  listener_arns     = module.alb.listener_arns
+
+  aws_region     = var.aws_region
+  aws_account_id = data.aws_caller_identity.current.account_id
+
+  repository_urls = module.ecr.repository_urls
+  repository_arns = module.ecr.repository_arns
+
+  artifacts_bucket_arn = module.data.artifacts_bucket_arn
+}

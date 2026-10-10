@@ -15,3 +15,12 @@ output "repository_names" {
     name => repo.name
   }
 }
+
+output "repository_arns" {
+  description = "ECR repository ARNs"
+
+  value = {
+    for name, repo in aws_ecr_repository.microservices :
+    name => repo.arn
+  }
+}
